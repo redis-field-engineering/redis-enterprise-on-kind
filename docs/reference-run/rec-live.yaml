@@ -1,0 +1,167 @@
+apiVersion: app.redislabs.com/v1
+kind: RedisEnterpriseCluster
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"app.redislabs.com/v1","kind":"RedisEnterpriseCluster","metadata":{"annotations":{},"name":"rec","namespace":"redis"},"spec":{"licenseSecretName":"rec-license","nodes":1,"persistentSpec":{"enabled":true,"storageClassName":"standard","volumeSize":"100Gi"},"redisEnterpriseNodeResources":{"limits":{"cpu":"12","memory":"105Gi"},"requests":{"cpu":"12","memory":"105Gi"}},"redisOnFlashSpec":{"bigStoreDriver":"speedb","enabled":true,"flashDiskSize":"843Gi","storageClassName":"redis-flex-local"}}}
+    operator_version: 8.2.0-18
+    redis.io/pvc_extra_labels: '{}'
+  creationTimestamp: "2026-10-07T19:54:20Z"
+  finalizers:
+  - redbfinalizer.redisenterpriseclusters.app.redislabs.com
+  - stsfinalizer.redisenterprisecluster.app.redislabs.com
+  - recpodfinalizer.redisenterprisecluster.app.redislabs.com
+  - reaadbfinalizer.redisenterprisecluster.app.redislabs.com
+  generation: 2
+  name: rec
+  namespace: redis
+  resourceVersion: "1036"
+  uid: eec8fba3-1630-450f-a446-e2b428561b3b
+spec:
+  clusterCredentialSecretName: rec
+  clusterCredentialSecretType: kubernetes
+  createServiceAccount: true
+  licenseSecretName: rec-license
+  nodes: 1
+  persistentSpec:
+    enabled: true
+    storageClassName: standard
+    volumeSize: 100Gi
+  podStartingPolicy:
+    enabled: false
+    startingThresholdSeconds: 540
+  redisEnterpriseImageSpec:
+    imagePullPolicy: IfNotPresent
+    repository: redislabs/redis
+    versionTag: 8.2.0-78.18
+  redisEnterpriseNodeResources:
+    limits:
+      cpu: "12"
+      memory: 105Gi
+    requests:
+      cpu: "12"
+      memory: 105Gi
+  redisOnFlashSpec:
+    bigStoreDriver: speedb
+    enabled: true
+    flashDiskSize: 843Gi
+    storageClassName: redis-flex-local
+  serviceAccountName: rec
+  services:
+    apiService:
+      type: ClusterIP
+  servicesRiggerSpec:
+    databaseServiceType: cluster_ip,headless
+    serviceNaming: bdb_name
+  uiServiceType: ClusterIP
+  username: demo@redis.com
+status:
+  bundledDatabaseVersions:
+  - dbType: memcached
+    featureSupport:
+      activeActive: false
+      flex: true
+    version: 1.4.17
+  - dbType: redis
+    featureSupport:
+      activeActive: true
+      flex: true
+    major: true
+    version: 6.2.13
+  - dbType: redis
+    featureSupport:
+      activeActive: true
+      flex: true
+    major: true
+    version: 7.2.7
+  - dbType: redis
+    featureSupport:
+      activeActive: true
+      flex: true
+    major: true
+    version: 7.4.3
+  - dbType: redis
+    featureSupport:
+      activeActive: true
+      flex: false
+    major: true
+    version: 8.0.2
+  - dbType: redis
+    featureSupport:
+      activeActive: true
+      flex: true
+    major: true
+    version: 8.2.1
+  - dbType: redis
+    featureSupport:
+      activeActive: true
+      flex: true
+    major: true
+    version: 8.4.0
+  - dbType: redis
+    featureSupport:
+      activeActive: true
+      flex: true
+    major: true
+    version: 8.6.2
+  clusterCredentialSecretName: rec
+  licenseStatus:
+    activationDate: "2026-10-07T19:55:17Z"
+    expirationDate: "2026-11-06T19:55:17Z"
+    features:
+    - trial
+    - bigstore
+    flashShards: 4
+    flashShardsLimit: null
+    licenseState: Valid
+    owner: ""
+    ramShards: 0
+    ramShardsLimit: null
+    shardsLimit: 4
+    shardsUsage: 4/4
+  managedAPIs:
+    ldap: true
+  modules:
+  - displayName: RedisJSON
+    name: ReJSON
+    versions:
+    - 8.6.6
+    - 8.4.7
+    - 8.2.12
+    - 8.0.7
+    - 2.8.20
+    - 2.6.25
+    - 2.4.20
+  - displayName: RedisBloom
+    name: bf
+    versions:
+    - 8.6.4
+    - 8.4.7
+    - 8.2.14
+    - 8.0.10
+    - 2.8.22
+    - 2.6.30
+  - displayName: RediSearch 2
+    name: search
+    versions:
+    - 8.6.11
+    - 8.4.13
+    - 8.2.16
+    - 8.0.3
+    - 2.10.33
+    - 2.8.39
+  - displayName: RedisTimeSeries
+    name: timeseries
+    versions:
+    - 8.6.1
+    - 8.4.8
+    - 8.2.9
+    - 8.0.7
+    - 1.12.13
+    - 1.10.23
+    - 1.8.22
+  persistenceStatus:
+    status: Provisioned
+    succeeded: 1/1
+  specStatus: Valid
+  state: Running

@@ -1,0 +1,40 @@
+NAME                       STATUS   ROLES           AGE   VERSION   INTERNAL-IP   EXTERNAL-IP   OS-IMAGE                       KERNEL-VERSION           CONTAINER-RUNTIME
+redis-flex-control-plane   Ready    control-plane   17h   v1.36.4   172.18.0.2    <none>        Debian GNU/Linux 13 (trixie)   7.0.0-1014-aws (amd64)   containerd://2.3.4
+
+NAME                                           NODES   SHARDS   VERSION       STATE     SPEC STATUS   LICENSE STATE   LICENSE EXPIRATION DATE   AGE
+redisenterprisecluster.app.redislabs.com/rec   1       4/4      8.2.0-78.18   Running   Valid         Valid           2026-11-06T19:55:17Z      17h
+
+NAME                                                VERSION   PORT    CLUSTER   SHARDS   STATUS   SPEC STATUS   AGE
+redisenterprisedatabase.app.redislabs.com/kvcache   8.2.1     12000   rec       4        active   Valid         16h
+
+NAME                                             READY   STATUS      RESTARTS   AGE   IP            NODE                       NOMINATED NODE   READINESS GATES
+pod/rec-0                                        2/2     Running     0          17h   10.244.0.9    redis-flex-control-plane   <none>           <none>
+pod/rec-call-home-client-29856900-5x2k2          0/1     Completed   0          13h   10.244.0.11   redis-flex-control-plane   <none>           <none>
+pod/rec-services-rigger-65f966fb85-vwvs7         1/1     Running     0          17h   10.244.0.7    redis-flex-control-plane   <none>           <none>
+pod/redis-enterprise-operator-6d7d7d57c8-bqjbr   2/2     Running     0          17h   10.244.0.6    redis-flex-control-plane   <none>           <none>
+
+NAME                                                   STATUS   VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS       VOLUMEATTRIBUTESCLASS   AGE   VOLUMEMODE
+persistentvolumeclaim/redis-enterprise-storage-rec-0   Bound    pvc-c109f256-d8a5-49b4-bce5-848a2c7b03a0   100Gi      RWO            standard           <unset>                 17h   Filesystem
+persistentvolumeclaim/redis-on-flash-storage-rec-0     Bound    redis-flex-nvme                            843Gi      RWO            redis-flex-local   <unset>                 17h   Filesystem
+
+NAME                       TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)             AGE   SELECTOR
+service/admission          ClusterIP   10.96.216.114   <none>        443/TCP             17h   name=redis-enterprise-operator
+service/kvcache            ClusterIP   10.96.49.82     <none>        12000/TCP           16h   redis.io/bdb-1=1
+service/kvcache-headless   ClusterIP   None            <none>        12000/TCP           16h   redis.io/bdb-1=1
+service/kvcache-nodeport   NodePort    10.96.75.48     <none>        12000:32000/TCP     16h   app=redis-enterprise,redis.io/cluster=rec,redis.io/role=node
+service/rec                ClusterIP   10.96.19.160    <none>        9443/TCP,8001/TCP   17h   app=redis-enterprise,redis.io/cluster=rec,redis.io/role=node
+service/rec-api-nodeport   NodePort    10.96.162.104   <none>        9443:30943/TCP      16h   app=redis-enterprise,redis.io/cluster=rec,redis.io/role=node
+service/rec-prom           ClusterIP   None            <none>        8070/TCP            17h   app=redis-enterprise,redis.io/cluster=rec,redis.io/role-master=1,redis.io/role=node
+service/rec-ui             ClusterIP   10.96.180.171   <none>        8443/TCP            17h   app=redis-enterprise,redis.io/cluster=rec,redis.io/role-master=1,redis.io/role=node
+service/rec-ui-nodeport    NodePort    10.96.206.218   <none>        8443:30443/TCP      16h   app=redis-enterprise,redis.io/cluster=rec,redis.io/role=node
+
+NAME                                                        CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS   CLAIM                                  STORAGECLASS       VOLUMEATTRIBUTESCLASS   REASON   AGE
+persistentvolume/pvc-c109f256-d8a5-49b4-bce5-848a2c7b03a0   100Gi      RWO            Delete           Bound    redis/redis-enterprise-storage-rec-0   standard           <unset>                          17h
+persistentvolume/redis-flex-nvme                            843Gi      RWO            Retain           Bound    redis/redis-on-flash-storage-rec-0     redis-flex-local   <unset>                          17h
+
+NAME                                             PROVISIONER                    RECLAIMPOLICY   VOLUMEBINDINGMODE      ALLOWVOLUMEEXPANSION   AGE
+storageclass.storage.k8s.io/redis-flex-local     kubernetes.io/no-provisioner   Retain          WaitForFirstConsumer   false                  17h
+storageclass.storage.k8s.io/standard (default)   rancher.io/local-path          Delete          WaitForFirstConsumer   false                  17h
+
+NAME                     	NAMESPACE	REVISION	UPDATED                                	STATUS  	CHART                             	APP VERSION
+redis-enterprise-operator	redis    	2       	2026-10-07 20:31:15.163480767 +0000 UTC	deployed	redis-enterprise-operator-8.2.0-18	8.2.0-18   

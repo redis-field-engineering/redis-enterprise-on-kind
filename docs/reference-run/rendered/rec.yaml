@@ -1,0 +1,26 @@
+apiVersion: app.redislabs.com/v1
+kind: RedisEnterpriseCluster
+metadata:
+  name: rec
+  namespace: redis
+spec:
+  # Single node: the only host is one kind node. (Docs list 3 as the production
+  # minimum; 1 is fine for a single-box KV cache with no HA.)
+  nodes: 1
+  redisEnterpriseNodeResources:
+    requests:
+      cpu: "12"
+      memory: 105Gi
+    limits:
+      cpu: "12"
+      memory: 105Gi
+  persistentSpec:
+    enabled: true
+    storageClassName: standard
+    volumeSize: 100Gi
+  redisOnFlashSpec:
+    enabled: true
+    bigStoreDriver: speedb
+    storageClassName: redis-flex-local
+    flashDiskSize: 843Gi
+  licenseSecretName: rec-license

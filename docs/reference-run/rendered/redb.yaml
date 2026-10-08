@@ -1,0 +1,19 @@
+apiVersion: app.redislabs.com/v1alpha1
+kind: RedisEnterpriseDatabase
+metadata:
+  name: kvcache
+  namespace: redis
+spec:
+  redisEnterpriseCluster:
+    name: rec
+  redisVersion: "8.2"
+  # Redis Flex: memorySize = RAM + flash total; rofRamSize = RAM tier.
+  isRof: true
+  memorySize: 687GB
+  rofRamSize: 64GB
+  shardCount: 4
+  replication: false
+  persistence: disabled
+  evictionPolicy: allkeys-lru
+  databasePort: 12000
+  tlsMode: disabled

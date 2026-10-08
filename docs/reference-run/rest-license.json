@@ -1,0 +1,16 @@
+{
+  "activation_date": "2026-10-07T19:55:17Z",
+  "cluster_name": null,
+  "expiration_date": "2026-11-06T19:55:17Z",
+  "expired": false,
+  "features": [
+    "trial",
+    "bigstore"
+  ],
+  "flash_shards_in_use": 4,
+  "flash_shards_limit": null,
+  "owner": null,
+  "ram_shards_in_use": 0,
+  "ram_shards_limit": null,
+  "shards_limit": 4
+}

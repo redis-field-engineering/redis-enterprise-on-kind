@@ -1,0 +1,28 @@
+# Single-node kind cluster for Redis Enterprise + Flex.
+kind: Cluster
+apiVersion: kind.x-k8s.io/v1alpha4
+name: redis-flex
+nodes:
+  - role: control-plane
+    image: kindest/node:v1.36.4@sha256:099e049362a1526b2db71494e1947aae99bd16290d7c895f2b7ea312e3cbfaed
+    extraMounts:
+      # NVMe filesystem (formatted + mounted on the host) -> static local PV for Flex.
+      - hostPath: /mnt/redis-flex
+        containerPath: /mnt/redis-flex
+      # Backing dir for kind's default local-path StorageClass (REC persistence).
+      - hostPath: /var/lib/redis-flex-kind/persist
+        containerPath: /var/local-path-provisioner
+    # host 127.0.0.1:<hostPort> -> NodePort services in manifests/expose.yaml.tpl
+    extraPortMappings:
+      - containerPort: 32000
+        hostPort: 12000
+        listenAddress: "127.0.0.1"
+        protocol: TCP
+      - containerPort: 30943
+        hostPort: 9443
+        listenAddress: "127.0.0.1"
+        protocol: TCP
+      - containerPort: 30443
+        hostPort: 8443
+        listenAddress: "127.0.0.1"
+        protocol: TCP

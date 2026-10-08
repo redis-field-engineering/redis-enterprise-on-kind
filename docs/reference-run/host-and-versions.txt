@@ -1,0 +1,58 @@
+## host
+Ubuntu 24.04.5 LTS
+7.0.0-1014-aws
+16
+               total        used        free      shared  buff/cache   available
+Mem:             123           4         113           0           7         119
+
+## tools
+Docker version 29.8.2, build 7fc2dff
+kind v0.33.0 go1.26.7 linux/amd64
+Client Version: v1.36.4
+v4.3.0+gbec5b06
+
+## disks
+NAME           SIZE MODEL                            FSTYPE   LABEL           MOUNTPOINT
+nvme1n1      884.8G Amazon EC2 NVMe Instance Storage ext4     redisflex       /mnt/redis-flex
+nvme0n1        200G Amazon Elastic Block Store                                
+├─nvme0n1p1    199G                                  ext4     cloudimg-rootfs /
+├─nvme0n1p14     4M                                                           
+├─nvme0n1p15   106M                                  vfat     UEFI            /boot/efi
+└─nvme0n1p16   913M                                  ext4     BOOT            /boot
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/nvme1n1    870G   17M  870G   1% /mnt/redis-flex
+/dev/root       193G  8.1G  185G   5% /
+
+## fstab (redis-flex)
+LABEL=redisflex /mnt/redis-flex ext4 noatime,nodiscard,nofail,x-systemd.device-timeout=10s 0 2
+
+## docker daemon.json
+{
+  "default-ulimits": {
+    "nofile": {
+      "Name": "nofile",
+      "Soft": 1048576,
+      "Hard": 1048576
+    }
+  }
+}
+
+## sysctl
+# kind / many containers
+fs.inotify.max_user_instances = 8192
+fs.inotify.max_user_watches = 1048576
+fs.file-max = 4194304
+# Redis
+vm.overcommit_memory = 1
+vm.swappiness = 0
+net.core.somaxconn = 65535
+
+## THP
+always madvise [never]
+
+## systemd units
+enabled
+enabled
+
+## nofile in kind node
+1048576

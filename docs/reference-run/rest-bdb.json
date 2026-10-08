@@ -1,0 +1,18 @@
+{
+  "uid": 1,
+  "name": "kvcache",
+  "status": "active",
+  "version": "8.2.1",
+  "port": 12000,
+  "shards_count": 4,
+  "sharding": true,
+  "bigstore": true,
+  "bigstore_ram_size": 68719476736,
+  "memory_size": 737660633088,
+  "eviction_policy": "allkeys-lru",
+  "data_persistence": "disabled",
+  "replication": false,
+  "proxy_policy": "single",
+  "oss_cluster": false,
+  "tls_mode": "disabled"
+}

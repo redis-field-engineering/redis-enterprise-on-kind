@@ -1,0 +1,9 @@
+# Copy to terraform.tfvars and adjust.
+owner = "first_last"   # required: lowercase, a-z0-9 and single underscores
+team  = "my_team"      # required
+# instance_type     = "r6id.4xlarge"   # or r8id.4xlarge
+# availability_zone = "us-east-1a"
+# ssh_allowed_cidrs = ["1.2.3.4/32"]   # default: auto-detect this machine's IP
+# run_installer     = true
+# redis_license_file = ""              # "" = trial; license must be for rec.redis.svc.cluster.local
+# installer_env     = { DB_RAM = "64GB", DB_SHARDS = "4" }   # see redis-flex-kind/config.env

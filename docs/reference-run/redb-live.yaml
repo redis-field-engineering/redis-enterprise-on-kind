@@ -1,0 +1,45 @@
+apiVersion: app.redislabs.com/v1alpha1
+kind: RedisEnterpriseDatabase
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"app.redislabs.com/v1alpha1","kind":"RedisEnterpriseDatabase","metadata":{"annotations":{},"name":"kvcache","namespace":"redis"},"spec":{"databasePort":12000,"evictionPolicy":"allkeys-lru","isRof":true,"memorySize":"687GB","persistence":"disabled","redisEnterpriseCluster":{"name":"rec"},"redisVersion":"8.2","replication":false,"rofRamSize":"64GB","shardCount":4,"tlsMode":"disabled"}}
+  creationTimestamp: "2026-10-07T19:55:56Z"
+  finalizers:
+  - finalizer.redisenterprisedatabases.app.redislabs.com
+  generation: 2
+  name: kvcache
+  namespace: redis
+  resourceVersion: "1052"
+  uid: 95a6869d-c426-4467-b7bb-98a992080ed5
+spec:
+  databasePort: 12000
+  databaseSecretName: redb-kvcache
+  evictionPolicy: allkeys-lru
+  isRof: true
+  memorySize: 687GB
+  persistence: disabled
+  redisEnterpriseCluster:
+    name: rec
+  redisVersion: "8.2"
+  replication: false
+  rofRamSize: 64GB
+  shardCount: 4
+  tlsMode: disabled
+status:
+  bigstoreVersion: 2
+  createdTime: "2026-10-07T19:55:56Z"
+  databaseUID: "1"
+  internalEndpoints:
+  - host: redis-12000.rec.redis.svc.cluster.local
+    port: 12000
+  lastActionStatus: completed
+  lastActionUid: 1f3e8ed7-9486-4db7-959d-25b0727ab192
+  lastUpdated: "2026-10-07T19:55:56Z"
+  observedGeneration: 2
+  redisEnterpriseCluster: rec
+  shardStatuses:
+    active: 4
+  specStatus: Valid
+  status: active
+  version: 8.2.1

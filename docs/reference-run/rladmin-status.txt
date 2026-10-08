@@ -1,0 +1,23 @@
+CLUSTER:
+OK. Cluster master: 1 (10.244.0.9)
+Cluster health: OK, (0, 0.0, 0.0)
+failures/minute - avg1 0.00, avg15 0.00, avg60 0.00.
+
+CLUSTER NODES:
+NODE:ID ROLE   ADDRESS    EXTERNAL_ADDRESS HOSTNAME MASTERS SLAVES OVERBOOKING_DEPTH SHARDS CORES FREE_RAM       PROVISIONAL_RAM FLASH             AVAILABLE_FLASH VERSION  SHA    RACK-ID SECOND-RACK-ID STATUS
+*node:1 master 10.244.0.9 10.244.0.9       rec-0    4       0      20.3GB            4/100  16    103.08GB/105GB 20.3GB/86.1GB   869.78GB/869.79GB 8.82GB/695.84GB 8.2.0-78 986748 -       -              OK    
+
+DATABASES:
+DB:ID NAME    TYPE        MODULE STATUS SHARDS MEMORY_SIZE PLACEMENT REPLICATION PERSISTENCE ENDPOINT                                      CRDB EXEC_STATE EXEC_STATE_MACHINE BACKUP_PROGRESS MISSING_BACKUP_TIME REDIS_VERSION
+db:1  kvcache redis/flash yes    active 4      687GB       dense     disabled    disabled    redis-12000.rec.redis.svc.cluster.local:12000 no   N/A        N/A                N/A             N/A                 8.2.1        
+
+ENDPOINTS:
+DB:ID  NAME      ID               NODE     ROLE     SSL      WATCHDOG_STATUS    
+db:1   kvcache   endpoint:1:1     node:1   single   No       OK                 
+
+SHARDS:
+DB:ID NAME    ID      NODE   ROLE   SLOTS       USED_MEMORY USED_RAM USED_FLASH RAM_FRAG FLASH_FRAG WATCHDOG_STATUS STATUS
+db:1  kvcache redis:1 node:1 master 0-4095      30.38MB     30.39MB  0KB        93.98MB  -22.6KB    OK              OK    
+db:1  kvcache redis:2 node:1 master 4096-8191   30.38MB     30.39MB  0KB        93.21MB  -22.6KB    OK              OK    
+db:1  kvcache redis:3 node:1 master 8192-12287  30.38MB     30.39MB  0KB        92.18MB  -22.6KB    OK              OK    
+db:1  kvcache redis:4 node:1 master 12288-16383 30.4MB      30.41MB  0KB        92.86MB  -22.6KB    OK              OK    

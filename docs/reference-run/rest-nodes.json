@@ -1,0 +1,15 @@
+[
+  {
+    "uid": 1,
+    "status": "active",
+    "software_version": "8.2.0-78",
+    "os_version": "Red Hat Enterprise Linux 9.8 (Plow)",
+    "cores": 16,
+    "total_memory": 112742891520,
+    "bigstore_driver": "speedb",
+    "bigstore_size": 933934116864,
+    "ephemeral_storage_size": 206900281344.0,
+    "persistent_storage_size": 206900281344.0,
+    "max_redis_servers": 100
+  }
+]
